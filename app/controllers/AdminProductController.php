@@ -46,9 +46,9 @@ class AdminProductController extends Controller
             $type = $_POST['type'] ?? '';
             $name = Validate::text($_POST['name'] ?? '');
             $description = Validate::text($_POST['description'] ?? '');
-            $price = Validate::number((float)($_POST['price'] ?? 0.00));
-            $discount = Validate::number((float)($_POST['discount'] ?? 0.00));
-            $send = Validate::number((float)($_POST['send'] ?? 0.00));
+            $price = floatval(Validate::number($_POST['price'] ?? 0.00));
+            $discount = floatval(Validate::number($_POST['discount'] ?? 0.00));
+            $send = floatval(Validate::number($_POST['send'] ?? 0.00));
             $image = Validate::file($_FILES['image']['name']);
             $published = $_POST['published'] ?? '';
             $relation1 = $_POST['relation1'] != '' ? $_POST['relation1'] : 0;
@@ -193,12 +193,12 @@ class AdminProductController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $type = $_POST['type'] ?? '';
+            $type = ($_POST['type'] ?? '');
             $name = Validate::text($_POST['name'] ?? '');
             $description = Validate::text($_POST['description'] ?? '');
-            $price = Validate::number((float)($_POST['price'] ?? 0.00));
-            $discount = Validate::number((float)($_POST['discount'] ?? 0.00));
-            $send = Validate::number((float)($_POST['send'] ?? 0.00));
+            $price = floatval(Validate::number($_POST['price'] ?? 0.00));
+            $discount = (floatval(Validate::number($_POST['discount'] ?? 0.00)));
+            $send = floatval(Validate::number($_POST['send'] ?? 0.00));
             $image = Validate::file($_FILES['image']['name']);
             $published = $_POST['published'] ?? '';
             $relation1 = $_POST['relation1'] != '' ? $_POST['relation1'] : 0;
