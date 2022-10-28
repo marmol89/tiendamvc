@@ -9,9 +9,23 @@ class Sales
         $this->db = Mysqldb::getInstance()->getDatabase();
     }
 
+
+    public function getCartsUser()
+    {
+        $sql = 'select users.id , users.first_name , carts.product_id , products.name , carts.date, carts.send , carts.discount, carts.quantity from carts JOIN users on carts.user_id = users.id JOIN products on products.id = carts.product_id where carts.state=1';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
     //Consulta de Prueba
 //use tiendamvc;
 //
-//select users.first_name , carts.date, carts.send , carts.discount, carts.quantity from carts INNER JOIN users on carts.user_id = users.id where users.id=1 AND carts.state=1;
+//select users.id , users.first_name , carts.product_id , products.name , carts.date, carts.send , carts.discount, carts.quantity from carts JOIN users on carts.user_id = users.id JOIN products on products.id = carts.product_id where carts.state=1;
+
+
+
+
 
 }
