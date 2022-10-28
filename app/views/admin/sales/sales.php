@@ -12,7 +12,6 @@
                 <th>Productos</th>
                 <th>PrecioTotal</th>
                 <th>Detalles</th>
-
                 </thead>
 
                 <tbody>
