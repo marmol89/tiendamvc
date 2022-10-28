@@ -15,19 +15,21 @@
                 </thead>
 
                 <tbody>
+                <?php for($i = 0; $i < count($data['data']);$i++):?>
 
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">Jose Manuel</td>
-                    <td class="text-center">Prueba , PHP</td>
-                    <td class="text-center">12€</td>
-                    <td class="text-center">
-                        <a href="<?= ROOT ?>adminSales/show/" class="btn btn-info">
-                            Detalles
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="text-center"><?=$data['data'][$i]['user_id']?></td>
+                        <td class="text-center"><?=$data['data'][$i]['first_name']?></td>
+                        <td class="text-center"><?=$data['data'][$i]['name']?></td>
+                        <td class="text-center"><?=$data['data'][$i]['price']?></td>
+                        <td class="text-center">
+                            <a href="<?= ROOT ?>adminSales/show/" class="btn btn-info">
+                                Detalles
+                            </a>
+                        </td>
+                    </tr>
 
+                <?php endfor; ?>
                 </tbody>
 
 

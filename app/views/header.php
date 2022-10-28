@@ -23,6 +23,8 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <?php if($data['menu']):?>
         <a href="<?= ROOT ?>shop" class="navbar-brand">Tienda</a>
+    <?php elseif(isset($data['admin']) && $data['admin']) :?>
+    <a href="<?= ROOT ?>AdminShop" class="navbar-brand">Tienda</a>
     <?php else :?>
         <a href="<?= ROOT ?>" class="navbar-brand">Tienda</a>
     <?php endif; ?>
