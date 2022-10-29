@@ -48,13 +48,19 @@ class AdminUser
         return $query->rowCount();
     }
 
-    public function getUsers()
+    // Obtiene usuarios administradores
+    public function getUsers($typeUser)
     {
-        $sql = 'SELECT * FROM admins WHERE deleted = 0';
+        $sql = 'SELECT * FROM ' . $typeUser; // deleted = 0: administradores no eliminados
+
+        if ($typeUser == 'admins') {
+            $sql .= ' WHERE deleted=0';
+        }
+
         $query = $this->db->prepare($sql);
         $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_OBJ);
+        return $query->fetchAll(PDO::FETCH_OBJ); // array de objetos admin
     }
 
     public function getUserById($id)
