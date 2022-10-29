@@ -80,7 +80,7 @@
                                 Detalles
                             </a>
                         </td>
-                        <td class="text-center btn"><a href="<?= ROOT ?>adminUser/delete/<?= $user->id ?>" class="btn btn-danger">
+                        <td class="text-center btn"><a href="<?= ROOT ?>adminUser/deleteUser/<?= $user->id ?>" class="btn btn-danger">
                                 Borrar
                             </a></td>
                     </tr>

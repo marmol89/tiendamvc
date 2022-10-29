@@ -178,7 +178,7 @@ class AdminUserController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $errors = $this->model->delete($id);
+            $errors = $this->model->delete($id , 'adminUser');
 
             if ( ! $errors ) {
                 header('location:' . ROOT . 'adminUser');
@@ -200,6 +200,36 @@ class AdminUserController extends Controller
 
         $this->view('admin/users/delete', $data);
     }
+
+
+    public function deleteUser($id)
+    {
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $errors = $this->model->delete($id , 'users');
+
+            if ( ! $errors ) {
+                header('location:' . ROOT . 'adminUser');
+            }
+
+        }
+
+        $user = $this->model->getUserById($id , 'users');
+
+        $data = [
+            'titulo' => 'Administración de Usuarios - Eliminación',
+            'menu' => false,
+            'admin' => true,
+            'data' => $user,
+            'errors' => $errors,
+        ];
+
+        $this->view('admin/users/delete', $data);
+    }
+
+
 
 
     public function show($id)

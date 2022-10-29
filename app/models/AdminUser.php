@@ -123,11 +123,13 @@ class AdminUser
 
     }
 
-    public function delete($id)
+    public function delete($id , $typeUser)
     {
         $errors = [];
 
-        $sql = 'UPDATE admins SET deleted=:deleted, deleted_at=:deleted_at WHERE id=:id';
+        $sql = 'UPDATE ' . $typeUser . ' SET deleted=:deleted, deleted_at=:deleted_at WHERE id=:id';
+
+
         $params = [
             ':id' => $id,
             ':deleted' => 1,
