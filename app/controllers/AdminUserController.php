@@ -248,4 +248,27 @@ class AdminUserController extends Controller
 
     }
 
+    public function reactivate($id)
+    {
+        $errors = [];
+        $errors =  $this->model->reactivate($id);
+
+        if(! count($errors)){
+            header('LOCATION:' . ROOT . 'adminUser');
+        }
+
+        $user = $this->model->getUserByid($id , 'users');
+
+        $data = [
+            'titulo' => 'Detalles de Usuario',
+            'menu' => false,
+            'admin' => true,
+            'user' => $user,
+            'errors' => $errors,
+        ];
+
+        $this->view('admin/users/show' , $data);
+
+    }
+
 }

@@ -102,8 +102,13 @@
                 </div>
             <?php endif; ?>
 
-            <div class="form-group text-left">
+            <div class="form-group text-left mt-3">
                 <a href="<?= ROOT ?>AdminUser/" class="btn btn-info">Regresar</a>
+                <?php if($data['user']->deleted):?>
+                <a href="<?= ROOT ?>AdminUser/reactivate/<?= $data['user']->id ?>" class="btn btn-warning ms-3">Activar</a>
+                <?php endif; ?>
+            </div>
+            <div class="form-group text-left">
             </div>
         </form>
     </div>

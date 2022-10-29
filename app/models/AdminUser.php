@@ -144,4 +144,18 @@ class AdminUser
 
         return $errors;
     }
+
+    public function reactivate($id)
+    {
+        $errors = [];
+        $sql = 'UPDATE users SET deleted=0 where id=:id';
+        $query = $this->db->prepare($sql);
+
+        if(! $query->execute([':id' => $id])){
+            array_push($errors , 'No se a podido activar el usuario');
+        }
+        return $errors;
+
+    }
+
 }
