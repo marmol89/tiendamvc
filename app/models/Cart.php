@@ -82,7 +82,7 @@ class Cart
 
     public function delete($product, $user)
     {
-        $sql = 'DELETE FROM carts WHERE user_id=:user_id AND product_id=:product_id';
+        $sql = 'DELETE FROM carts WHERE user_id=:user_id AND product_id=:product_id AND state=0';
 
         $query = $this->db->prepare($sql);
 

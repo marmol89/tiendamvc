@@ -157,7 +157,7 @@ class AdminUserController extends Controller
             }
         }
 
-        $user = $this->model->getUserById($id);
+        $user = $this->model->getUserById($id , 'admins');
         $status = $this->model->getConfig('adminStatus');
 
         $data = [
@@ -186,7 +186,7 @@ class AdminUserController extends Controller
 
         }
 
-        $user = $this->model->getUserById($id);
+        $user = $this->model->getUserById($id , 'admins');
         $status = $this->model->getConfig('adminStatus');
 
         $data = [
@@ -200,4 +200,22 @@ class AdminUserController extends Controller
 
         $this->view('admin/users/delete', $data);
     }
+
+
+    public function show($id)
+    {
+        $user = $this->model->getUserByid($id , 'users');
+
+        $data = [
+            'titulo' => 'Detalles de Usuario',
+            'menu' => false,
+            'admin' => true,
+            'user' => $user,
+        ];
+
+        $this->view('admin/users/show' , $data);
+
+
+    }
+
 }

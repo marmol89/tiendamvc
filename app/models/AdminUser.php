@@ -63,9 +63,9 @@ class AdminUser
         return $query->fetchAll(PDO::FETCH_OBJ); // array de objetos admin
     }
 
-    public function getUserById($id)
+    public function getUserById($id , $typeUser)
     {
-        $sql = 'SELECT * FROM admins WHERE id=:id';
+        $sql = 'SELECT * FROM ' .$typeUser. ' WHERE id=:id';
         $query = $this->db->prepare($sql);
         $query->execute([':id' => $id]);
 
@@ -129,9 +129,9 @@ class AdminUser
 
         $sql = 'UPDATE admins SET deleted=:deleted, deleted_at=:deleted_at WHERE id=:id';
         $params = [
-            'id' => $id,
-            'deleted' => 1,
-            'deleted_at' => date('Y-m-d H:i:s'),
+            ':id' => $id,
+            ':deleted' => 1,
+            ':deleted_at' => date('Y-m-d H:i:s'),
         ];
 
         $query = $this->db->prepare($sql);

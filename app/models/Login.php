@@ -29,9 +29,9 @@ class Login
             $password = hash_hmac('sha512', $data['password'], ENCRIPTKEY);
 
             $sql = 'INSERT INTO users(first_name, last_name_1, last_name_2, email, 
-                  address, city, state, zipcode, country, password) 
+                  address, city, state, zipcode, country, password ,created_at, deleted) 
                   VALUES(:first_name, :last_name_1, :last_name_2, :email, 
-                  :address, :city, :state, :zipcode, :country, :password)';
+                  :address, :city, :state, :zipcode, :country, :password , :created_at , :deleted )';
 
             $params = [
                 ':first_name' => $data['firstName'],
@@ -44,6 +44,8 @@ class Login
                 ':zipcode' => $data['postcode'],
                 ':country' => $data['country'],
                 ':password' => $password,
+                ':created_at' => date('Y-m-d H:i:s'),
+                ':deleted' => 0,
             ];
 
             $query = $this->db->prepare($sql);
@@ -56,7 +58,7 @@ class Login
 
     public function getUserByEmail($email)
     {
-        $sql = 'SELECT * FROM users WHERE email=:email';
+        $sql = 'SELECT * FROM users WHERE email=:email AND deleted=0';
         $query = $this->db->prepare($sql);
         $query->bindParam(':email', $email, PDO::PARAM_STR);
         $query->execute();
@@ -90,10 +92,11 @@ class Login
     {
         $pass = hash_hmac('sha512', $password, ENCRIPTKEY);
 
-        $sql = 'UPDATE users SET password=:password WHERE id=:id';
+        $sql = 'UPDATE users SET password=:password created_at=:created_at WHERE id=:id';
         $params = [
             ':id' => $id,
             ':password' => $pass,
+            ':created_at' => date('Y-m-d H:i:s'),
         ];
         $query = $this->db->prepare($sql);
         return $query->execute($params);

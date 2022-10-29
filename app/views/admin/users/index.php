@@ -65,7 +65,7 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Correo</th>
-                <th>Editar</th>
+                <th>Detalles</th>
                 <th>Borrar</th>
                 </thead>
 
@@ -73,11 +73,11 @@
                 <?php foreach ($data['users'] as $user): ?>
                     <tr>
                         <td class="text-center"><?= $user->id ?></td>
-                        <td class="text-center"><?= $user->first_name ?></td>
+                        <td class="text-center"><?= $user->first_name . ' ' .  $user->last_name_1 ?></td>
                         <td class="text-center"><?= $user->email ?></td>
                         <td class="text-center">
-                            <a href="<?= ROOT ?>adminUser/update/<?= $user->id ?>" class="btn btn-info">
-                                Editar
+                            <a href="<?= ROOT ?>adminUser/show/<?= $user->id ?>" class="btn btn-info">
+                                Detalles
                             </a>
                         </td>
                         <td class="text-center btn"><a href="<?= ROOT ?>adminUser/delete/<?= $user->id ?>" class="btn btn-danger">
