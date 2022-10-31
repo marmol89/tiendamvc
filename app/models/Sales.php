@@ -32,6 +32,7 @@ class Sales
             'discount' => $carts[0]->discount ,
             'quantity' => $carts[0]->quantity ,
             'price' => $carts[0]->price,
+            'cart_id' => $carts[0]->cart_id,
         ));
 
 
@@ -67,6 +68,7 @@ class Sales
                     'discount' => $carts[$i]->discount ,
                     'quantity' => $carts[$i]->quantity ,
                     'price' => $carts[$i]->price,
+                    'cart_id' => $carts[$i]->cart_id,
                 ));
             }
         }
@@ -74,5 +76,30 @@ class Sales
         return $cartList;
 
     }
+
+
+    public function getDateByCarts($user_id , $cart_id)
+    {
+
+        $sql = 'SELECT date FROM carts WHERE id=:cart_id AND user_id=:user_id';
+        $query = $this->db->prepare($sql);
+        $query->execute([':user_id' => $user_id , ':cart_id' => $cart_id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function getCart($user_id , $date)
+    {
+        $sql = 'SELECT c.user_id as user, c.product_id as product, c.quantity as quantity, 
+                    c.send as send, c.discount as discount, p.price as price, p.image as image, p.description as description,
+                    p.name as name FROM carts as c, products as p 
+                       WHERE c.user_id=:user_id AND state=1 AND c.product_id=p.id AND c.date=:date';
+
+        $query = $this->db->prepare($sql);
+        $query->execute([':user_id' => $user_id , ':date' => $date]);
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 }

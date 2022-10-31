@@ -9,6 +9,9 @@
                 <li class="breadcrumb-item">Gracias</li>
             </ol>
         </nav>
+        <div class="progress mt-2 mb-3">
+            <div class="progress-bar progress-bar-striped" role="progressbar"  style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">100%</div>
+        </div>
         <h2>Estimado/a <?= $data['data']->first_name ?>:</h2>
         <h4>¡Gracias por visitarnos y hacer su compra! Estamos contentos de que haya encontrado lo que buscaba. Nuestro objetivo es que siempre esté satisfecho, avísenos de su nivel de satisfacción. Esperamos volver a verle pronto.</h4>
         <h3>¡Que tenga un gran día!</h3>

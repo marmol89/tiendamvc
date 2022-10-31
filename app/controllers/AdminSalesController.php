@@ -9,7 +9,7 @@ class AdminSalesController extends Controller
         $this->model = $this->model('Sales');
     }
 
-    public function index()
+    public function index($numNext = 1)
     {
         $session = new SessionAdmin();
 
@@ -18,12 +18,29 @@ class AdminSalesController extends Controller
             $carts = $this->model->getCarts();
             $cartList = $this->model->groupingCards($carts);
 
+            $next = ceil( count($cartList)/5 );
+
+            //Calcular linea
+            $num = intval($numNext) ;
+
+            $numNext = ($numNext * 5);
+            $min = $numNext -5;
+
+            if($numNext > count($cartList)){
+                $aux = count($cartList) - $min;
+                $numNext = $min + $aux;
+            }
+
             $data = [
                 'titulo' => 'Administración de Ventas',
                 'menu' => false,
                 'admin' => true,
                 'subtitle' => 'Administración de Ventas',
                 'data' => $cartList,
+                'next' => $next,
+                'numNext' => $numNext,
+                'num' => $num,
+                'min' => $min,
             ];
             $this->view('admin/sales/sales', $data);
         } else {
@@ -33,8 +50,24 @@ class AdminSalesController extends Controller
     }
 
 
-    public function show($id , $date)
+    public function show($user_id , $cart_id)
     {
+
+        $date = $this->model->getDateByCarts($user_id , $cart_id);
+
+
+
+        $cart = $this->model->getCart($user_id , $date->date);
+
+        $data = [
+            'titulo' => 'Carrito',
+            'menu' => false,
+            'admin' => true,
+            'user_id' => $user_id,
+            'data' => $cart,
+        ];
+
+        $this->view('admin/sales/show', $data);
 
     }
 

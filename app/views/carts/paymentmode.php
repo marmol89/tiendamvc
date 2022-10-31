@@ -8,6 +8,9 @@
                 <li class="breadcrumb-item"><a href="#">Verifica los datos</a></li>
             </ol>
         </nav>
+        <div class="progress mt-2 mb-3">
+            <div class="progress-bar progress-bar-striped" role="progressbar"  style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">50%</div>
+        </div>
         <div class="card-header">
             <h1><?= $data['titulo'] ?></h1>
             <p>Por favor, elija la forma de pago</p>
