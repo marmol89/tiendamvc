@@ -43,11 +43,13 @@ class Sales
             {
                 if($cartList[$j]['user_id'] == $carts[$i]->user_id && $carts[$i]->date == $cartList[$j]['date'])
                 {
-                    if($carts[$i]->porduct_id != $cartList[$j]['porduct_id'] ){
+                    if($carts[$i]->porduct_id != $cartList[$j]['porduct_id'] )
+                    {
                         $axu = true;
                         break;
                     }
-                }else {
+                }else
+                {
                     $axu = false;
                 }
             }

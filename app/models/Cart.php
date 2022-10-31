@@ -105,4 +105,13 @@ class Cart
         ];
         return $query->execute($params);
     }
+
+    public function getPayments(){
+        $sql = 'SELECT * FROM payments';
+        $query = $this->db->prepare($sql);
+        $query ->execute();
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
 }

@@ -17,6 +17,7 @@ class AdminSalesController extends Controller
 
             $carts = $this->model->getCarts();
             $cartList = $this->model->groupingCards($carts);
+
             $data = [
                 'titulo' => 'Administración de Ventas',
                 'menu' => false,

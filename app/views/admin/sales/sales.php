@@ -23,7 +23,7 @@
                         <td class="text-center"><?=$data['data'][$i]['name']?></td>
                         <td class="text-center"><?=$data['data'][$i]['price']?></td>
                         <td class="text-center">
-                            <a href="<?= ROOT ?>adminSales/show/" class="btn btn-info">
+                            <a href="<?= ROOT ?>adminSales/show/<?=$data['data'][$i]['user_id']?>/<?=$data['data'][$i]['date']?>" class="btn btn-info">
                                 Detalles
                             </a>
                         </td>

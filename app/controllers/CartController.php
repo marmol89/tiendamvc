@@ -215,11 +215,13 @@ class CartController extends Controller
         }else {
             $session->login($user);
 
+            $payments = $this->model->getPayments();
 
             $data = [
                 'titulo' => 'Carrito | Forma de Pago',
                 'subtitle' => 'Checkout | Forma de Pago',
                 'menu' => true,
+                'payments' => $payments,
             ];
 
             $this->view('carts/paymentmode' , $data);
