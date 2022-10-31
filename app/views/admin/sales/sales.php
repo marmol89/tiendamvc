@@ -37,9 +37,15 @@
 
                         <?php if($data['num'] == 1 ):?>
                             <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">First</a>
+                            </li>
+                            <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1">Previous</a>
                             </li>
                         <?php else : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?=ROOT?>AdminSales/index/1" tabindex="-1">First</a>
+                            </li>
                             <li class="page-item">
                                 <a class="page-link" href="<?=ROOT?>AdminSales/index/<?= ($data['num']-1) ?>" tabindex="-1">Previous</a>
                             </li>
@@ -53,9 +59,15 @@
                             <li class="page-item disabled">
                             <a class="page-link" href="#" ">Next</a>
                             </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Last</a>
+                            </li>
                         <?php else : ?>
                             <li class="page-item">
                             <a class="page-link" href="<?=ROOT?>AdminSales/index/<?= ($data['num'] + 1) ?>">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="<?=ROOT?>AdminSales/index/<?= ($data['next']) ?>">Last</a>
                             </li>
                         <?php endif;?>
 
