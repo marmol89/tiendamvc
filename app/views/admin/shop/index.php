@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="card text-bg-primary mb-3 " style="max-width: 17rem;">
+            <div class="card text-bg-primary mb-1 ms-3 " style="max-width: 17rem;">
                 <div class="card-header">Usuarios</div>
                 <div class="card-body">
                     <h5 class="card-title">Usuarios Registrados</h5>
