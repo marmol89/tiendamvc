@@ -7,10 +7,11 @@
 
             <table class="table table-striped text-center" width="100%">
                 <thead>
-                <th>id</th>
+                <th>User ID</th>
                 <th>Nombre</th>
                 <th>Productos</th>
                 <th>PrecioTotal</th>
+                <th>Fecha</th>
                 <th>Detalles</th>
                 </thead>
 
@@ -21,6 +22,7 @@
                         <td class="text-center"><?=$data['data'][$i]['first_name']?></td>
                         <td class="text-center"><?=$data['data'][$i]['name']?></td>
                         <td class="text-center"><?=$data['data'][$i]['price']?></td>
+                        <td class="text-center"><?=$data['data'][$i]['date']?></td>
                         <td class="text-center">
                             <a href="<?= ROOT ?>adminSales/show/<?=$data['data'][$i]['user_id']?>/<?=$data['data'][$i]['cart_id']?>" class="btn btn-info">
                                 Detalles
