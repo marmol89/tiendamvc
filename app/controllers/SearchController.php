@@ -15,7 +15,7 @@ class SearchController extends Controller
 
         if($search !== ''){
 
-            $dataSearch = $this->model->getProducts($search);
+            $dataSearch = trim( Validate::text($this->model->getProducts($search)));
             $data = [
                 'titulo' => 'Buscador de productos',
                 'data' => $dataSearch,
