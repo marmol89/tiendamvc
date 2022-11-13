@@ -190,6 +190,7 @@ class AdminProductController extends Controller
         $typeConfig = $this->model->getConfig('productType');
         $statusConfig = $this->model->getConfig('productStatus');
         $catalogue = $this->model->getCatalogue();
+        $img = $this->model->getImg($id)[0];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -273,6 +274,7 @@ class AdminProductController extends Controller
                     if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                         move_uploaded_file($_FILES['image']['tmp_name'], 'img/' . $image);
                         Validate::resizeImage($image, 240);
+                        unlink('img/' . $img);
                     } else {
                         array_push($errors, 'Error al subir el archivo de imagen');
                     }

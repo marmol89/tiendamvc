@@ -148,4 +148,11 @@ class AdminProduct
         return $errors;
     }
 
+    public function getImg($id){
+        $sql = 'SELECT image FROM products where id=:id';
+        $query = $this->db->prepare($sql);
+        $query->execute([':id' => $id]);
+        return $query->fetch(PDO::FETCH_SERIALIZE);
+    }
+
 }
