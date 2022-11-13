@@ -12,11 +12,11 @@ class CartController extends Controller
     public function index($errors = [])
     {
         $session = new Session();
-
         if ($session->getLogin()) {
 
             $user_id = $session->getUserId();
             $cart = $this->model->getCart($user_id);
+            $total = $this->model->getTotal($cart);
 
             if(count($cart) == 0){
                 header('location:' . ROOT . 'shop');
@@ -28,6 +28,7 @@ class CartController extends Controller
                 'user_id' => $user_id,
                 'data' => $cart,
                 'errors' => $errors,
+                'total' => $total,
             ];
 
             $this->view('carts/index', $data);
@@ -119,7 +120,9 @@ class CartController extends Controller
         }
 
         $errors = [];
-        $user = $session->getUser();
+
+
+            $userData = $session->getUser();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -133,75 +136,75 @@ class CartController extends Controller
             $postcode = $_POST['postcode'] ?? '';
             $country = $_POST['country'] ?? '';
 
-            if($user->first_name != $firstName) {
+            if($userData->first_name != $firstName) {
                 if ($firstName == '') {
                     array_push($errors, 'Hay que poner un Nombre Obligatirio');
                 } else {
-                    $user->first_name = $firstName;
+                    $userData->first_name = $firstName;
                 }
             }
 
-            if($user->last_name_1 != $lastName1){
+            if($userData->last_name_1 != $lastName1){
                 if($lastName1 == ''){
                     array_push($errors , 'Hay que poner el Primer apellido Obligatirio');
                 }else {
-                    $user->last_name_1 = $lastName1;
+                    $userData->last_name_1 = $lastName1;
                 }
             }
 
-            if($user->last_name_2 != $lastName2){
+            if($userData->last_name_2 != $lastName2){
                 if($lastName2 == ''){
                     array_push($errors , 'Hay que poner el Segundo apellido Obligatirio');
                 }else {
-                    $user->last_name_2 = $lastName2;
+                    $userData->last_name_2 = $lastName2;
                 }
             }
 
-            if($user->email != $email){
+            if($userData->email != $email){
                 if($email == ''){
                     array_push($errors , 'Hay que poner el Email Obligatirio');
                 }else {
-                    $user->email = $email;
+                    $userData->email = $email;
                 }
             }
 
-            if($user->address != $address){
+            if($userData->address != $address){
                 if($address == ''){
                     array_push($errors , 'Hay que poner la Direccion Obligatirio');
                 }else {
-                    $user->address = $address;
+                    $userData->address = $address;
                 }
             }
 
-            if($user->city != $city){
+            if($userData->city != $city){
                 if($city == ''){
                     array_push($errors , 'Hay que poner la ciudad Obligatirio');
                 }else {
-                    $user->city = $city;
+                    $userData->city = $city;
                 }
             }
 
-            if($user->state != $state){
+            if($userData->state != $state){
                 if($state == ''){
                     array_push($errors , 'Hay que poner la Probincia Obligatirio');
                 }else {
-                    $user->state = $state;
+                    $userData->state = $state;
                 }
             }
 
-            if($user->zipcode != $postcode){
+            if($userData->zipcode != $postcode){
                 if($postcode == 0){
                     array_push($errors , 'Hay que poner el Codigo Postal Obligatirio');
                 }else {
-                    $user->zipcode = $postcode;
+                    $userData->zipcode = $postcode;
                 }
             }
 
-            if($user->country != $country){
+            if($userData->country != $country){
                 if($country == ''){
                     array_push($errors , 'Hay que poner el Pasis Obligatirio');
                 }else {
-                    $user->country = $country;
+                    $userData->country = $country;
                 }
             }
         }
@@ -212,13 +215,12 @@ class CartController extends Controller
                 'titulo' => 'Carrito | Checkout',
                 'subtitle' => 'Checkout | Iniciar session',
                 'menu' => true,
-                'data' => $user,
+                'data' => $userData,
                 'errors' => $errors,
             ];
             $this->view('carts/address' , $data);
         }else {
-            $session->login($user);
-
+            $this->userData = $userData;
             $payments = $this->model->getPayments();
 
             $data = [
@@ -237,6 +239,7 @@ class CartController extends Controller
         $session = new Session();
         $user = $session->getUser();
         $cart = $this->model->getCart($user->id);
+        $total = $this->model->getTotal($cart);
         $payment = $_POST['payment'] ?? '';
 
         $data = [
@@ -245,6 +248,7 @@ class CartController extends Controller
             'payment' => $payment,
             'user' => $user,
             'data' => $cart,
+            'total' => $total,
         ];
 
         $this->view('carts/verify' , $data);

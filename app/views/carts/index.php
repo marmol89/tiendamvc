@@ -1,5 +1,5 @@
 <?php include_once(VIEWS . 'header.php') ?>
-<?php $verify = false; $subtotal = 0; $send = 0; $discount = 0; $user_id = $data['user_id'] ?>
+<?php $verify = false;?>
 <h2 class="text-center">Carrito de Compras</h2>
 <form action="<?= ROOT ?>cart/update" method="POST">
     <table class="table table-stripped" width="100%">
@@ -36,11 +36,7 @@
                     >Borrar</a>
                 </td>
             </tr>
-            <?php $subtotal += $value->price * $value->quantity ?>
-            <?php $discount += $value->discount ?>
-            <?php $send += $value->send ?>
         <?php endforeach; ?>
-        <?php $total = $subtotal - $discount + $send ?>
         <input type="hidden" name="rows" value="<?= count($data['data']) ?>">
         <input type="hidden" name="user_id" value="<?= $data['user_id'] ?>">
     </table>
@@ -49,22 +45,22 @@
         <tr>
             <td width="79.25%"></td>
             <td width="11.55%">Subtotal:</td>
-            <td width="9.20%"><?= number_format($subtotal, 2) ?></td>
+            <td width="9.20%"><?= number_format($data['total']['subtotal'], 2) ?></td>
         </tr>
         <tr>
             <td width="79.25%"></td>
             <td width="11.55%">Descuento:</td>
-            <td width="9.20%"><?= number_format($discount, 2) ?></td>
+            <td width="9.20%"><?= number_format($data['total']['discount'], 2) ?></td>
         </tr>
         <tr>
             <td width="79.25%"></td>
             <td width="11.55%">Envío:</td>
-            <td width="9.20%"><?= number_format($send, 2) ?></td>
+            <td width="9.20%"><?= number_format($data['total']['send'], 2) ?></td>
         </tr>
         <tr>
             <td width="79.25%"></td>
             <td width="11.55%">Total:</td>
-            <td width="9.20%"><?= number_format($total, 2) ?></td>
+            <td width="9.20%"><?= number_format($data['total']['total'], 2) ?></td>
         </tr>
         <tr>
             <td>

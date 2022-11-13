@@ -114,4 +114,23 @@ class Cart
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+
+    public function getTotal($cart) {
+        $total = [
+            'subtotal' => 0,
+            'send' => 0,
+            'discount' => 0,
+            'total' => 0,
+        ];
+        foreach ($cart as $value) {
+            $total['subtotal'] += $value->price * $value->quantity;
+            $total['send'] += $value->send;
+            $total['discount'] += $value->discount;
+        }
+
+        $total['total'] = $total['subtotal'] - $total['discount'] + $total['send'];
+
+        return $total;
+    }
+
 }
