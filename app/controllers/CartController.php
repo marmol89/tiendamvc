@@ -220,7 +220,7 @@ class CartController extends Controller
             ];
             $this->view('carts/address' , $data);
         }else {
-            $this->userData = $userData;
+
             $payments = $this->model->getPayments();
 
             $data = [
