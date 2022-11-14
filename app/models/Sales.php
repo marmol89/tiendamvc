@@ -104,5 +104,13 @@ class Sales
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getShipping($user_id){
+        $sql = 'SELECT first_name as name , last_name_1, last_name_2, email , address, city, state, zipcode, country FROM users where id=:id';
+        $query = $this->db->prepare($sql);
+        $query->execute([':id' => $user_id]);
+
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
 
 }

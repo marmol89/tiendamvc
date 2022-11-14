@@ -54,10 +54,8 @@ class AdminSalesController extends Controller
     {
 
         $date = $this->model->getDateByCarts($user_id , $cart_id);
-
-
-
         $cart = $this->model->getCart($user_id , $date->date);
+        $shipping = $this->model->getShipping($user_id);
 
         $data = [
             'titulo' => 'Carrito',
@@ -65,6 +63,7 @@ class AdminSalesController extends Controller
             'admin' => true,
             'user_id' => $user_id,
             'data' => $cart,
+            'shipping' => $shipping,
         ];
 
         $this->view('admin/sales/show', $data);

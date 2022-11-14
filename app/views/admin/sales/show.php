@@ -43,28 +43,68 @@
                 <input type="hidden" name="user_id" value="<?= $data['user_id'] ?>">
             </table>
             <hr>
-            <table width="100%" class="text-end">
-                <tr>
-                    <td width="79.25%"></td>
-                    <td width="11.55%">Subtotal:</td>
-                    <td width="9.20%" class="bg-danger text-white rounded" ><?= number_format($subtotal, 2) ?> &euro;</td>
-                </tr>
-                <tr>
-                    <td width="79.25%"></td>
-                    <td width="11.55%">Descuento:</td>
-                    <td width="9.20%" class="bg-dark text-white rounded" ><?= number_format($discount, 2) ?> &euro;</td>
-                </tr>
-                <tr>
-                    <td width="79.25%"></td>
-                    <td width="11.55%">Envío:</td>
-                    <td width="9.20%" class="bg-info text-white rounded" ><?= number_format($send, 2) ?> &euro;</td>
-                </tr>
-                <tr>
-                    <td width="79.25%"></td>
-                    <td width="11.55%"">Total:</td>
-                    <td width="9.20%" class="bg-primary text-white rounded" ><?= number_format($total, 2) ?> &euro;</td>
-                </tr>
-            </table>
+            <div class="d-flex flex-row justify-content-between">
+                <div class="">
+                    <table class="w-100">
+                            <tr>
+                                <td>Nombre:</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->name?></td>
+                            </tr>
+                            <tr>
+                                <td>Apellidos:</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->last_name_1 . ' ' . $data['shipping']->last_name_2 ?></td>
+                            </tr>
+                            <tr>
+                                <td>email :</td>
+                                <td class="text-black rounded" ><?=$data['shipping']->email?></td>
+                            </tr>
+                            <tr>
+                                <td>Address :</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->address?></td>
+                            </tr>
+                            <tr>
+                                <td>Ciudad :</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->city?></td>
+                            </tr>
+                            <tr>
+                                <td>Provincia :</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->state?></td>
+                            </tr>
+                            <tr>
+                                <td>Código postal :</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->zipcode?></td>
+                            </tr>
+                            <tr>
+                                <td>País :</td>
+                                <td class="text-black rounded" ><?= $data['shipping']->country?></td>
+                            </tr>
+
+                    </table>
+
+                </div>
+                <div class="">
+                    <table class="text-end w-100 me-5 ">
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td class="bg-danger text-white rounded" ><?= number_format($subtotal, 2) ?> &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Descuento:</td>
+                            <td class="bg-dark text-white rounded" ><?= number_format($discount, 2) ?> &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Envío:</td>
+                            <td class="bg-info text-white rounded" ><?= number_format($send, 2) ?> &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Total:</td>
+                            <td class="bg-primary text-white rounded" ><?= number_format($total, 2) ?> &euro;</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
         </form>
     </div>
 
