@@ -9,11 +9,12 @@
             </ol>
         </nav>
         <h2><?= $data['subtitle'] ?></h2>
-        <form class="text-end">
+        <form class="text-end" action="<?= ROOT ?>cart/address" method="POST">
             <div class="form-group">
                 <label for="user">Correo electrónico:</label>
                 <input type="email" name="email" class="form-control"
                        placeholder="Escribe el correo electrónico"
+                       value="<?= $data['data'] ?? '' ?>"
                 >
             </div>
             <div class="form-group">
@@ -23,7 +24,7 @@
                 >
             </div>
             <div class="form-group text-left">
-                <a href="<?= ROOT ?>cart/address" class="btn btn-success">Enviar</a>
+                <input type="submit" value="Enviar" class="btn btn-success">
             </div>
         </form>
     </div>

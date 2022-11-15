@@ -16,11 +16,13 @@ class CartController extends Controller
 
             $user_id = $session->getUserId();
             $cart = $this->model->getCart($user_id);
-            $total = $this->model->getTotal($cart);
 
             if(count($cart) == 0){
                 header('location:' . ROOT . 'shop');
             }
+
+            $total = $this->model->getTotal($cart);
+
 
             $data = [
                 'titulo' => 'Carrito',
@@ -102,7 +104,7 @@ class CartController extends Controller
             $data = [
                 'titulo' => 'Carrito | Checkout',
                 'subtitle' => 'Checkout | Iniciar session',
-                'menu' => true,
+                'menu' => false,
             ];
 
             $this->view('carts/checkout' , $data);
@@ -284,6 +286,53 @@ class CartController extends Controller
             ];
 
             $this->view('mensaje', $data);
+        }
+    }
+
+    public function address()
+    {
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $user = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+
+            if ($user == '') {
+                array_push($errors, 'El usuario es requerido');
+            }
+            if ($password == '') {
+                array_push($errors, 'La contraseña es requerida');
+            }
+
+            $this->model = $this->model('Login');
+
+            $errors = $this->model->verifyUser($user, $password);
+
+            if (!$errors) {
+                $data = $this->model->getUserByEmail($user);
+                $session = new Session();
+                $session->login($data);
+
+                header("location:" . ROOT . 'cart');
+            } else {
+                $data = [
+                    'titulo' => 'Carrito | Checkout',
+                    'subtitle' => 'Checkout | Iniciar sesion',
+                    'menu'   => false,
+                    'errors' => $errors,
+                    'data' => $user,
+                ];
+                $this->view('carts/checkout', $data);
+            }
+
+        } else {
+            $data = [
+                'titulo' => 'Carrito | Checkout',
+                'subtitle' => 'Checkout | Iniciar sesion',
+                'menu'   => false,
+            ];
+            $this->view('carts/checkout', $data);
         }
     }
 
