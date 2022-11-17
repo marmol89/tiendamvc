@@ -36,7 +36,9 @@ class Application
                 } else {
                     header('HTTP/1.0 404 Not Found');
 
-                    // Tratamos el error producido cuando creemos el controlador de Error
+                    require_once '../app/controllers/ErrorController.php';
+                    $page = new ErrorController();
+                    $page->index();
                 }
             }
         } else {
