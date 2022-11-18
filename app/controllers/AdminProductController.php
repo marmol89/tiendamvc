@@ -26,7 +26,7 @@ class AdminProductController extends Controller
                 'products' => $products,
             ];
 
-            $this->view('admin/product/index', $data);
+            $this->view('admin/products/index', $data);
 
         } else {
             header('location:' . ROOT . 'admin');
@@ -181,7 +181,7 @@ class AdminProductController extends Controller
             'data' => $dataForm,
         ];
 
-        $this->view('admin/product/create', $data);
+        $this->view('admin/products/create', $data);
     }
 
     public function update($id)
@@ -334,7 +334,7 @@ class AdminProductController extends Controller
             'product' => $product,
         ];
 
-        $this->view('admin/product/update', $data);
+        $this->view('admin/products/update', $data);
     }
 
     public function delete($id)
@@ -361,6 +361,7 @@ class AdminProductController extends Controller
             'type' => $typeConfig,
             'product' => $product,
         ];
+        $this->view('admin/products/delete');
     }
 
 }
